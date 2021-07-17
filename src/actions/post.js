@@ -1,5 +1,4 @@
 import axios from 'axios'
-// Type c'est le nom de l'action qui doit etre mené
 
 export function readPost(id){
     return {
