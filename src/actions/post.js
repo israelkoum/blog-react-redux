@@ -17,11 +17,11 @@ export const readPosts = () => {
             url:"https://api.jikan.moe/v3/search/anime?q=naruto"
             
         })
-        .then(response => {
-            console.log(response)
+        .then(({data}) => {
+            console.log(data.results)
             dispatch({
                 type:'READ_POSTS',
-                payload:response
+                payload:data.results
             })
         })
         .catch(error => console.error(error))
@@ -29,4 +29,11 @@ export const readPosts = () => {
     }
 }
 
+export function deletePost (id) {
+
+    return {
+        type:'DELETE_POST',
+        payload:id
+    }
+}
 // payload c'est la valeur 

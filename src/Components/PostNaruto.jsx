@@ -1,15 +1,28 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { deletePost } from '../actions/post'
 
-const PostNaruto = ({film, deleted}) => {
 
-    return (
-        <div>
-            <img src = {film.image_url} alt=""/>
-            <p> <b>Title: </b>{film.title}</p>
-            <p> <b>synopsis: </b>{film.synopsis}</p>
-            <button onClick ={() => deleted(film.mal_id)}>Supprimer </button>           
+class PostNaruto extends React.Component {
+
+    constructor(props) {
+        super(props)
+    }
+
+   
+    render () {
+        const { image_url, title, synopsis } = this.props.film
+        return (
+            <div>
+            <img src = {image_url} alt=""/>
+            <p> <b>Title: </b>{title}</p>
+            <p> <b>synopsis: </b>{synopsis}</p>
+            {/* <button onClick ={() => deleted(mal_id)}>Supprimer </button>            */}
         </div>
-    )
+        )
+    }
+
 }
 
-export default PostNaruto
+
+export default connect (null, null)(PostNaruto)
