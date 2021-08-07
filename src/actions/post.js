@@ -8,7 +8,7 @@ export function readPost(id){
     }
 }
 
-
+let dataResult = []
 
 export const readPosts = () => {
     return function (dispatch){
@@ -18,16 +18,42 @@ export const readPosts = () => {
             
         })
         .then(({data}) => {
-            console.log(data.results)
             dispatch({
                 type:'READ_POSTS',
                 payload:data.results
             })
+            return data.results
+
         })
+        
+        .then(getDataResult => {
+            dataResult.push(...getDataResult)
+            const listCategory =  dataResult.reduce((acc, curr) => {
+                if (!acc.includes(curr.type)) acc.push(curr.type)
+                return acc
+            }, [])
+            dispatch({
+                type:'SET_CATEGORY',
+                payload:listCategory
+            })
+            console.log(listCategory)
+            return listCategory
+        })
+        
         .catch(error => console.error(error))
 
     }
 }
+
+export function readActivCategory(category){
+    return function (dispatch){
+        dispatch({
+            type: 'READ_ACTIVCATEGORY',
+            payload: category
+        })
+    }
+}
+
 
 export function deletePost (id) {
 
@@ -36,4 +62,6 @@ export function deletePost (id) {
         payload:id
     }
 }
+
+
 // payload c'est la valeur 
